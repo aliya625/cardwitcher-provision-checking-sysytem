@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Witcher Provision Checking System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Witcher Provision Checking System</h1>
+  </header>
+  
+  <main>
+    <section class="provision-check">
+      <h2>Check Your Witcher Provision</h2>
+      <form id="provision-form">
+        <label for="provision-name">Provision Name:</label>
+        <input type="text" id="provision-name" name="provision-name" required>
+        <button type="submit">Check</button>
+      </form>
+      <div id="provision-result"></div>
+    </section>
+
+    <section class="payment-details">
+      <h2>Payment Details</h2>
+      <p>Amount: <span id="amount">Rs.10000</span></p>
+      <p>Status: <span id="status">paid</span></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Witcher Provision System</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
