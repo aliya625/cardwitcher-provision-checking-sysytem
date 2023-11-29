@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Cards Shop</title>
+    <style>
+        body {
+            background-image: url("login\ image_files/.jpg");
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .card:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login Form -->
+<form id="loginForm">
+    <h2>Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <button type="button" onclick="login()">Login</button>
+    <p id="errorMessage" style="color: red;"></p>
+</form>
+
+<!-- Card Selection -->
+<div id="cardSelection" style="display: none;">
+    <h2>Select a Card</h2>
+    <div class="card" onclick="selectCard('birthday')">Birthday Card</div>
+    <div class="card" onclick="selectCard('valentine')">Valentine's Card</div>
+    <div class="card" onclick="selectCard('wedding')">wedding Card</div>
+    <div class="card" onclick="selectCard('friendship day')">friendship day Card</div>
+    <div class="card" onclick="selectCard('mothers day')">mother's day Card</div>
+    <!-- Add more card options as needed -->
+
+    <!-- Selected Card Offers -->
+    <div id="cardOffers" style="display: none;">
+        <h2>Card Offers</h2>
+        <div id="offersContainer"></div>
+    </div>
+</div>
+
+<!-- Payment Details -->
+<div id="paymentDetails" style="display: none;">
+    <h2>Payment Details</h2>
+    <!-- Display payment details form here -->
+    <form id="paymentForm" onsubmit="processPayment(); return false;">
+        <label for="creditCard">Credit Card Number:</label>
+        <input type="text" id="creditCard" name="creditCard" required>
+        <br>
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" name="expiryDate" required>
+        <br>
+        <button type="submit">Submit Payment</button>
+    </form>
+</div>
+
+<script>
+    // Card offers data
+    var cardOffersData = {
+        birthday: ["20% off", "Free shipping"],
+        valentine: ["Buy one, get one free", "Personalized message option"],
+        // Add more card types and offers as needed
+    };
+
+    function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Perform login validation (placeholder logic)
+        // For simplicity, let's assume a hardcoded username and password
+        if (username === "user" && password === "pass") {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("cardSelection").style.display = "block";
+        } else {
+            document.getElementById("errorMessage").innerText = "Invalid username or password.";
+        }
+    }
+
+    function selectCard(cardType) {
+        // Perform card selection logic
+        document.getElementById("cardSelection").style.display = "none";
+        document.getElementById("cardOffers").style.display = "block";
+        updateOffers(cardType);
+    }
+
+    function updateOffers(cardType) {
+        var offersContainer = document.getElementById("offersContainer");
+        offersContainer.innerHTML = ""; // Clear previous offers
+
+        // Get offers based on the selected card
+        var offers = getOffersForCard(cardType);
+        console.log("Selected card:", cardType);
+        console.log("Offers:", offers);
+
+        // Display offers
+        offers.forEach(function (offer) {
+            var offerElement = document.createElement("div");
+            offerElement.className = "card";
+            offerElement.innerText = offer;
+            offerElement.onclick = function () {
+                selectOffer(offer);
+            };
+            offersContainer.appendChild(offerElement);
+        });
+    }
+
+    function getOffersForCard(cardType) {
+        // Retrieve offers from the cardOffersData object
+        return cardOffersData[cardType] || [];
+    }
+
+    function selectOffer(offerType) {
+        // Perform offer selection logic
+        document.getElementById("cardOffers").style.display = "none";
+        document.getElementById("paymentDetails").style.display = "block";
+    }
+
+    function processPayment() {
+        // Perform payment processing logic (placeholder)
+        alert("Payment successful! Thank you for your purchase.");
+        // You would typically send payment details to a server for processing here
+    }
+</script>
+
+</body>
+</html>
